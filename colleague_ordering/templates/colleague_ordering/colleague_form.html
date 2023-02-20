@@ -1,0 +1,36 @@
+{% extends "colleague_ordering/colleague_base.html" %}
+{%load crispy_forms_tags %}
+
+{% block content %}
+
+<!--{{form}} Refrances models.py class -->
+<form action="" method="post" autocomplete="off">
+    {% csrf_token %} <!-- security mesure from django, confirms post request from trusted source -->
+    {{form.firstname|as_crispy_field}}
+    {{form.sirname|as_crispy_field}}
+    <div class="row">
+       <!-- CUSTOMISE FORM SO FIELDS ON THE SAME ROW--> 
+        <div class="col-md-4">
+            {{form.colleagueID|as_crispy_field}}  
+        </div>
+        <div class="col-md-4">
+            {{form.jobfamily|as_crispy_field}}  
+        </div>
+        <div class="col-md-4">
+            {{form.status|as_crispy_field}}  
+        </div>
+    </div>
+    <div class = "row">
+        <div class="col md-8">
+            <button type="submit" class="btn btn-success btn-block btn-lg"><i class="fa-regular fa-floppy-disk"></i> Submit</button>
+        </div>
+        <div class="col md-4">
+            <a href="{% url 'colleague_list' %}" class="btn btn-secondary btn-block btn-lg">
+                <i class= "fas.fa-stream"></i> Back to List
+            </a>
+        </div>
+    </div>
+    <!--Button icon from https://fontawesome.com/icons/floppy-disk?s=regular&f=classic-->
+</form>
+
+{% endblock content %}

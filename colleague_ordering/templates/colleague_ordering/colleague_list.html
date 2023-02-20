@@ -1,0 +1,62 @@
+{% extends "colleague_ordering/colleague_base.html" %}
+
+{% block content %}
+
+<table class="table table-borderless">
+
+    <!--TABLE HEADER-->
+    <thead class ="border-bottom.font-weight-bold">
+        
+        <tr>
+            <td>First Name</td> 
+            <td>Sirname</td>
+            <td>Colleague ID</td>
+            <td>Job Family</td>
+            <td>Status</td>
+            <td>
+                <!--ADD NEW BUTTON URL NAVIGATES TO COLLEAGUE FORM (INSERT)-->
+                <a href="{% url 'colleague_insert' %}" class="btn btn-outline-success">
+                    <i class= "fas fa-plus"></i> Add New
+                </a>
+                <!--ADD NEW BUTTON URL NAVIGATES TO COLLEAGUE FORM (INSERT)-->
+            </td>
+            
+        </tr>
+    </thead>
+    
+    <!--TABLE BODY-->
+    <!--CRUD RETRIVE OPERATION-->
+    <tbody>
+    {% for colleague in colleague_list %}
+        <tr>
+            <td>{{colleague.firstname}}</td>
+            <td>{{colleague.sirname}}</td>
+            <td>{{colleague.colleagueID}}</td>
+            <td>{{colleague.jobfamily}}</td>
+            <td>{{colleague.status}}</td>
+            <td>
+                <!--CRUD RETRIVE OPERATION EDIT BUTTON URL NAVIGATES TO COLLEAGUE FORM  -->
+                <a href="{% url 'colleague_update' colleague.id %}" class="btn btn-outline-success">
+                    <i class= "fas fa-plus"></i> Edit
+                </a>
+                <!--CRUD RETRIVE OPERATION EDIT BUTTON URL NAVIGATES TO COLLEAGUE FORM  -->
+                <!--DELETE FUNCTION-->
+                <form action="{% url 'colleague_delete' colleague.id %}" method="POST" class="d-inline"> <!--DELETE FUNCTION-->
+                    {% csrf_token %}
+                    <button type="submit" class = "btn btn-outline-success">
+                        <i class= "fas fa-plus"></i> Delete
+                       <!-- <i class="far fa-trash-alt fa-lg text-danger float-right"></i>-->
+                    </button>
+                
+                </form>
+                <!--DELETE FUNCTION-->
+            </td>
+        </tr>
+    {%endfor %}
+
+    </tbody>
+
+
+</table>
+
+{% endblock content %}
